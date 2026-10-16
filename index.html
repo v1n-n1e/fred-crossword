@@ -32,6 +32,7 @@
   --accent: #4f85e5;
   --party-1: #ffcf33; --party-2: #4f85e5; --party-3: #ef5a5a; --party-4: #48b77d; --party-5: #ff8fc6;
   --string: #8a8a8a;
+  --star: #ffe3f0;
   --font-ui: "Libre Franklin", "Franklin Gothic Medium", "Helvetica Neue", Arial, sans-serif;
   --font-display: "Zilla Slab", Rockwell, "Roboto Slab", Georgia, serif;
 }
@@ -40,7 +41,7 @@
     --bg: #161616; --ink: #f0f0f0; --muted: #a3a3a3; --rule: #333333; --grid-line: #4d4d4d;
     --cell: #262626; --block: #050505; --sel: #e8c400; --sel-ink: #121212; --word: #2f5577;
     --ref: #253547; --bar: #22384d; --checked: #7fa8ff; --wrong: #ff5a5a; --chrome: #1f1f1f;
-    --key: #2e2e2e; --key-edge: #111111; --overlay: rgba(22,22,22,.95); --accent: #7fa8ff;
+    --key: #2e2e2e; --key-edge: #111111; --overlay: rgba(22,22,22,.95); --accent: #7fa8ff; --star: #43283a;
     color-scheme: dark;
   }
 }
@@ -48,7 +49,7 @@
   --bg: #161616; --ink: #f0f0f0; --muted: #a3a3a3; --rule: #333333; --grid-line: #4d4d4d;
   --cell: #262626; --block: #050505; --sel: #e8c400; --sel-ink: #121212; --word: #2f5577;
   --ref: #253547; --bar: #22384d; --checked: #7fa8ff; --wrong: #ff5a5a; --chrome: #1f1f1f;
-  --key: #2e2e2e; --key-edge: #111111; --overlay: rgba(22,22,22,.95); --accent: #7fa8ff;
+  --key: #2e2e2e; --key-edge: #111111; --overlay: rgba(22,22,22,.95); --accent: #7fa8ff; --star: #43283a;
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
@@ -92,6 +93,7 @@ header.masthead { display: flex; flex-wrap: nowrap; align-items: flex-start; gap
   user-select: none; -webkit-user-select: none; touch-action: manipulation; }
 .cell { position: relative; background: var(--cell); cursor: pointer; overflow: hidden; }
 .cell.block { background: var(--block); cursor: default; }
+.cell.star { background: var(--star); }
 .cell.ref { background: var(--ref); }
 .cell.word { background: var(--word); }
 .cell.sel { background: var(--sel); color: var(--sel-ink); }
@@ -356,6 +358,9 @@ const cellEls = cells.map(cell => {
   board.appendChild(el);
   return el;
 });
+// Fred's own entry gets a soft tint
+const starClue = clues.across.find(c => c.n === 35);
+if (starClue) starClue.cells.forEach(i => cellEls[i].classList.add('star'));
 for (const dir of ['across', 'down']) {
   const ol = $(dir + 'List');
   for (const cl of clues[dir]) {
