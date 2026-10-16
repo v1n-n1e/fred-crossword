@@ -154,10 +154,6 @@ header.masthead { display: flex; flex-wrap: nowrap; align-items: flex-start; gap
 .balloon:nth-of-type(2) { animation-delay: -1.5s; animation-duration: 5.2s; }
 .balloon:nth-of-type(3) { animation-delay: -3s; animation-duration: 4s; }
 @keyframes bob { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-6px) rotate(2deg); } }
-.side-balloons { position: fixed; top: 110px; width: 110px; height: 230px; pointer-events: none; display: none; z-index: 1; }
-.side-balloons.left { left: max(10px, calc((100vw - 1120px) / 2 - 140px)); }
-.side-balloons.right { right: max(10px, calc((100vw - 1120px) / 2 - 140px)); }
-@media (min-width: 1400px) { .side-balloons { display: block; } }
 .cake { width: 72px; height: 64px; }
 @media (max-width: 560px) {
   .bunting { height: 46px; background-size: 172px 46px; }
@@ -197,8 +193,6 @@ body.touch .hint { display: none; }
 <body>
 
 <div class="bunting" id="bunting" aria-hidden="true"></div>
-<svg class="side-balloons left" viewBox="0 0 110 230" aria-hidden="true"></svg>
-<svg class="side-balloons right" viewBox="0 0 110 230" aria-hidden="true"></svg>
 <div class="wrap">
   <header class="masthead">
     <div class="titles">
@@ -626,10 +620,6 @@ function balloon(cx, cy, r, color, tx, ty) {
 }
 document.querySelector('.masthead .balloons').innerHTML =
   balloon(34, 34, 20, PARTY[2], 60, 110) + balloon(84, 28, 19, PARTY[1], 60, 110) + balloon(60, 48, 21, PARTY[0], 60, 110);
-document.querySelector('.side-balloons.left').innerHTML =
-  balloon(36, 50, 26, PARTY[4], 55, 228) + balloon(76, 82, 24, PARTY[3], 55, 228);
-document.querySelector('.side-balloons.right').innerHTML =
-  balloon(70, 46, 26, PARTY[0], 55, 228) + balloon(34, 86, 24, PARTY[2], 55, 228);
 document.querySelector('.masthead .party').innerHTML =
   [...'Happy Birthday, Fred!'].map(ch => `<span aria-hidden="true">${ch === ' ' ? '&nbsp;' : ch}</span>`).join('');
 
